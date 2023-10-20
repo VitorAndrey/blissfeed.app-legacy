@@ -1,5 +1,7 @@
+import { Button } from "@ui//Button";
 import { Text } from "@ui//Text";
 import { Dimensions, Image, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // import Carousel from "react-native-reanimated-carousel";
 
@@ -22,14 +24,14 @@ export function Splash() {
           />
         )}
       /> */}
-      <View className="absolute z-50 h-full w-full items-center justify-evenly bg-black/70">
+      <SafeAreaView className="absolute z-50 h-full w-full items-center justify-between bg-black/70 py-12">
         <Text className="font-happy-monkey text-5xl text-white">Blissfeed</Text>
 
-        <View>
-          <Text className="text-white">Login</Text>
-          <Text className="text-white">Login</Text>
+        <View className="w-full gap-5 px-10">
+          <Button>Login</Button>
+          <Button>SignUp</Button>
         </View>
-      </View>
+      </SafeAreaView>
 
       <Image
         source={require("../assets/carrousel-1.jpg")}

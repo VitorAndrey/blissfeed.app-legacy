@@ -13,6 +13,8 @@ module.exports = {
 
         "bg-black": "#888888",
         "bg-white": "#eeeeee",
+
+        primary: "#FBE0C3",
       },
     },
   },
