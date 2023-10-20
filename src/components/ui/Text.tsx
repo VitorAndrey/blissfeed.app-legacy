@@ -5,5 +5,5 @@ type TextProps = NativeTextProps & {
 };
 
 export function Text({ children }: TextProps) {
-  return <NativeText>{children}</NativeText>;
+  return <NativeText className="font-poppins-400">{children}</NativeText>;
 }

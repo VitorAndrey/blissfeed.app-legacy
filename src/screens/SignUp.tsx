@@ -1,6 +1,9 @@
-import { Text } from "react-native";
-import React from "react";
+import { Text, View } from "react-native";
 
 export function SignUp() {
-  return <Text>SignUp</Text>;
+  return (
+    <View>
+      <Text>SignUp</Text>
+    </View>
+  );
 }
