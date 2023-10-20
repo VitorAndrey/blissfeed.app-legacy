@@ -1,9 +1,10 @@
-import { Text, View } from "react-native";
+import { Text } from "@ui//Text";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function SignUp() {
   return (
-    <View>
+    <SafeAreaView className="flex-1">
       <Text>SignUp</Text>
-    </View>
+    </SafeAreaView>
   );
 }

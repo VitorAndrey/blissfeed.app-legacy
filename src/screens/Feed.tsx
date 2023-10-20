@@ -1,10 +1,10 @@
 import { Text } from "@ui//Text";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Feed() {
   return (
-    <View>
+    <SafeAreaView className="flex-1">
       <Text>Feed</Text>
-    </View>
+    </SafeAreaView>
   );
 }
