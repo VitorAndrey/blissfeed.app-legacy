@@ -5,7 +5,7 @@ import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export function Routes() {
-  const isUserLogged = true;
+  const isUserLogged = false;
 
   return (
     <View className="flex-1">

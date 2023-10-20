@@ -7,13 +7,13 @@ module.exports = {
         "happy-monkey": "HappyMonkey_400Regular",
         "poppins-400": "Poppins_400Regular",
       },
-    },
-    colors: {
-      "font-black": "#888888",
-      "font-white": "#eeeeee",
+      colors: {
+        "font-black": "#888888",
+        "font-white": "#eeeeee",
 
-      "bg-black": "#888888",
-      "bg-white": "#eeeeee",
+        "bg-black": "#888888",
+        "bg-white": "#eeeeee",
+      },
     },
   },
   plugins: [],
