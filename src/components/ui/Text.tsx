@@ -5,5 +5,5 @@ type TextProps = NativeTextProps & {
 };
 
 export function Text({ children }: TextProps) {
-  return <NativeText className="font-happy-monkey">{children}</NativeText>;
+  return <NativeText>{children}</NativeText>;
 }

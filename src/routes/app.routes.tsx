@@ -1,17 +1,36 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationProp,
+} from "@react-navigation/bottom-tabs";
 
+import { CreatePost } from "@screens/CreatePost";
 import { Feed } from "@screens/Feed";
 
-type AppRoutesProps = {
+type AppRoutes = {
   Feed: undefined;
+  CreatePost: undefined;
 };
 
-const Tab = createBottomTabNavigator<AppRoutesProps>();
+export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
+
+const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 export function AppRoutes() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-    </Tab.Navigator>
+    <Navigator
+      initialRouteName="Feed"
+      sceneContainerStyle={{ backgroundColor: "transparent" }}
+      backBehavior="history"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#222222",
+        tabBarInactiveTintColor: "#999999",
+        tabBarStyle: {},
+      }}
+    >
+      <Screen name="Feed" component={Feed} />
+      <Screen name="CreatePost" component={CreatePost} />
+    </Navigator>
   );
 }

@@ -4,12 +4,11 @@ import {
 } from "@expo-google-fonts/happy-monkey";
 
 import { Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { AppProvider } from "@layout//AppProvider";
 import { Loading } from "@layout//Loading";
-import { Routes } from "@routes/Routes";
+import { Routes } from "@routes/index";
 
 import { StatusBar } from "expo-status-bar";
-
-import { View } from "react-native";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -18,9 +17,10 @@ export default function App() {
   });
 
   return (
-    <View className="flex-1">
+    <AppProvider>
+      <StatusBar style="dark" translucent backgroundColor="transparent" />
+
       {fontsLoaded ? <Routes /> : <Loading />}
-      <StatusBar style="auto" />
-    </View>
+    </AppProvider>
   );
 }
