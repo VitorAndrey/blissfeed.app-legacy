@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export function Feed() {
+export function Loading() {
   return (
     <View>
-      <Text>Feed</Text>
+      <Text>Loading</Text>
     </View>
   );
 }
