@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import {
   useFonts,
   HappyMonkey_400Regular,
