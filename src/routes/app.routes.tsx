@@ -20,6 +20,8 @@ import {
 import { useColorScheme } from "nativewind";
 
 import colors from "src/theme/colors";
+import { useContext } from "react";
+import { SearchContext } from "@contexts/SearchContext";
 
 export type AppRoutes = {
   Feed: undefined;
@@ -34,6 +36,7 @@ export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 export function AppRoutes() {
+  const { isSearching } = useContext(SearchContext);
   const { colorScheme } = useColorScheme();
 
   const tabBarActiveTintColor =
@@ -75,6 +78,12 @@ export function AppRoutes() {
         component={Search}
         options={{
           tabBarIcon: ({ color }) => <SearchIcon color={color} />,
+          tabBarStyle: {
+            display: isSearching ? "none" : undefined,
+            height: 60,
+            backgroundColor: "transparent",
+            elevation: 0,
+          },
         }}
       />
       <Screen
