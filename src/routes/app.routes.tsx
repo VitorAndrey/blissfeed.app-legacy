@@ -10,7 +10,7 @@ import { Meditate } from "@screens/Meditate";
 import { Profile } from "@screens/Profile";
 
 import {
-  HeartHandshake,
+  Coffee,
   Home,
   PenSquare,
   SearchIcon,
@@ -21,7 +21,7 @@ import { useColorScheme } from "nativewind";
 
 import colors from "src/theme/colors";
 
-type AppRoutes = {
+export type AppRoutes = {
   Feed: undefined;
   Search: undefined;
   CreatePost: undefined;
@@ -89,7 +89,7 @@ export function AppRoutes() {
         name="Meditate"
         component={Meditate}
         options={{
-          tabBarIcon: ({ color }) => <HeartHandshake color={color} />,
+          tabBarIcon: ({ color }) => <Coffee color={color} />,
         }}
       />
       <Screen

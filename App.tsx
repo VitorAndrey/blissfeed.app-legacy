@@ -1,7 +1,5 @@
 import "react-native-gesture-handler";
 
-import { ColorSchemeName } from "react-native";
-
 import {
   useFonts,
   HappyMonkey_400Regular,
@@ -24,11 +22,13 @@ export default function App() {
 
   const { colorScheme } = useColorScheme();
 
-  const color: ColorSchemeName = colorScheme === "light" ? "dark" : "light";
-
   return (
     <AppProvider>
-      <StatusBar style={color} translucent backgroundColor="transparent" />
+      <StatusBar
+        style={colorScheme === "light" ? "dark" : "light"}
+        translucent
+        backgroundColor="transparent"
+      />
 
       {fontsLoaded ? <Routes /> : <Loading />}
     </AppProvider>
