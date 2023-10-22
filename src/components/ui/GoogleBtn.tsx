@@ -13,7 +13,7 @@ export function GoogleBtn({ className, children, ...rest }: IconButtonProps) {
   return (
     <Pressable
       className={twMerge(
-        "h-12 flex-row items-center justify-center rounded-xl border border-zinc-200 bg-white px-6",
+        "h-12 flex-row items-center justify-center rounded-xl border px-6",
         className,
       )}
       {...rest}

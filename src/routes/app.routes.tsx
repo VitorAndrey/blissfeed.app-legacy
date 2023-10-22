@@ -9,6 +9,18 @@ import { CreatePost } from "@screens/CreatePost";
 import { Meditate } from "@screens/Meditate";
 import { Profile } from "@screens/Profile";
 
+import {
+  HeartHandshake,
+  Home,
+  PenSquare,
+  SearchIcon,
+  User2,
+} from "lucide-react-native";
+
+import { useColorScheme } from "nativewind";
+
+import colors from "src/theme/colors";
+
 type AppRoutes = {
   Feed: undefined;
   Search: undefined;
@@ -22,6 +34,18 @@ export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 export function AppRoutes() {
+  const { colorScheme } = useColorScheme();
+
+  const tabBarActiveTintColor =
+    colorScheme === "light"
+      ? colors.activeTabBarIcon.light
+      : colors.activeTabBarIcon.dark;
+
+  const tabBarInactiveTintColor =
+    colorScheme === "light"
+      ? colors.inactiveTabBarIcon.light
+      : colors.inactiveTabBarIcon.dark;
+
   return (
     <Navigator
       initialRouteName="Feed"
@@ -30,19 +54,51 @@ export function AppRoutes() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#222222",
-        tabBarInactiveTintColor: "#999999",
+        tabBarActiveTintColor,
+        tabBarInactiveTintColor,
         tabBarStyle: {
           backgroundColor: "transparent",
           elevation: 0,
+          height: 60,
         },
       }}
     >
-      <Screen name="Feed" component={Feed} />
-      <Screen name="Search" component={Search} />
-      <Screen name="CreatePost" component={CreatePost} />
-      <Screen name="Meditate" component={Meditate} />
-      <Screen name="Profile" component={Profile} />
+      <Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          tabBarIcon: ({ color }) => <Home color={color} />,
+        }}
+      />
+      <Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({ color }) => <SearchIcon color={color} />,
+        }}
+      />
+      <Screen
+        name="CreatePost"
+        component={CreatePost}
+        options={{
+          tabBarIcon: ({ color }) => <PenSquare color={color} />,
+          tabBarStyle: { display: "none" },
+        }}
+      />
+      <Screen
+        name="Meditate"
+        component={Meditate}
+        options={{
+          tabBarIcon: ({ color }) => <HeartHandshake color={color} />,
+        }}
+      />
+      <Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ color }) => <User2 color={color} />,
+        }}
+      />
     </Navigator>
   );
 }

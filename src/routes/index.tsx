@@ -10,7 +10,7 @@ export function Routes() {
   const { isUserLogged } = useContext(UserContext);
 
   return (
-    <View className="flex-1">
+    <View className="bg-background-light dark:bg-background-dark flex-1">
       <NavigationContainer>
         {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
