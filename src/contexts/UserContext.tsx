@@ -2,7 +2,8 @@ import { ReactNode, createContext, useState } from "react";
 
 type UserContextType = {
   isUserLogged: boolean;
-  setIsUserLogged: (value: boolean) => void;
+  handleUserLogged: () => void;
+  handleUserUnlogged: () => void;
 };
 
 export const UserContext = createContext({} as UserContextType);
@@ -10,8 +11,18 @@ export const UserContext = createContext({} as UserContextType);
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [isUserLogged, setIsUserLogged] = useState<boolean>(false);
 
+  function handleUserLogged() {
+    setIsUserLogged(true);
+  }
+
+  function handleUserUnlogged() {
+    setIsUserLogged(false);
+  }
+
   return (
-    <UserContext.Provider value={{ isUserLogged, setIsUserLogged }}>
+    <UserContext.Provider
+      value={{ isUserLogged, handleUserLogged, handleUserUnlogged }}
+    >
       {children}
     </UserContext.Provider>
   );

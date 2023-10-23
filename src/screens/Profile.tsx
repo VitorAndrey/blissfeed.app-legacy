@@ -5,10 +5,11 @@ import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Profile() {
-  const { setIsUserLogged } = useContext(UserContext);
+  const { handleUserUnlogged } = useContext(UserContext);
 
   function handleSignOut() {
-    setIsUserLogged(false);
+    // await SignOut
+    handleUserUnlogged();
   }
 
   return (
