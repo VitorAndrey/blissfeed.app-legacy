@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         "happy-monkey": "HappyMonkey_400Regular",
         "poppins-400": "Poppins_400Regular",
+        "itim-400": "Itim_400Regular",
       },
       colors: colors,
     },

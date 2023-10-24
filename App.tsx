@@ -5,9 +5,11 @@ import {
   HappyMonkey_400Regular,
 } from "@expo-google-fonts/happy-monkey";
 
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { Itim_400Regular } from "@expo-google-fonts/itim";
+
 import { useColorScheme } from "nativewind";
 
-import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 import { AppProvider } from "@layout//AppProvider";
 import { Loading } from "@layout//Loading";
 import { Routes } from "@routes/index";
@@ -18,6 +20,7 @@ export default function App() {
   let [fontsLoaded] = useFonts({
     HappyMonkey_400Regular,
     Poppins_400Regular,
+    Itim_400Regular,
   });
 
   const { colorScheme } = useColorScheme();
