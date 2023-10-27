@@ -15,6 +15,12 @@ module.exports = {
     light: "#aaaaaa",
     dark: "#666666",
   },
+
+  border: {
+    light: "#aaaaaa",
+    dark: "#666666",
+  },
+
   font: {
     light: "#222222",
     dark: "#fefefe",
