@@ -1,4 +1,4 @@
-export function fetchPosts() {
+export function getPosts() {
   return [
     {
       id: "1",

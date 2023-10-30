@@ -1,25 +1,22 @@
-import { Post } from "@layout/Post";
-import { Text } from "@ui/Text";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FlatList, RefreshControl, TouchableOpacity, View } from "react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { fetchPosts } from "@services/fetchPosts";
+import { Text } from "@ui/Text";
+import { Post } from "@layout/Post";
+import { Loading } from "@layout/Loading";
+
+import { getPosts } from "@services/fetchPosts";
+import { useQuery } from "@tanstack/react-query";
 
 export function Feed() {
-  const [posts, setPosts] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    fetchPosts();
-  }, []);
-
-  function fetchPosts() {
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }
+  const { data, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+  });
 
   const flatListRef = useRef<FlatList>(null);
 
@@ -29,35 +26,48 @@ export function Feed() {
     }
   }
 
-  useEffect(() => {}, []);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="z-50 border-b border-zinc-100 bg-background-light p-2 dark:bg-background-dark">
-        <TouchableOpacity onPress={scrollToTop}>
+      <View className="z-50 h-16 items-center justify-center border-b border-zinc-100 bg-background-light p-2 dark:bg-background-dark">
+        <TouchableOpacity
+          onPress={scrollToTop}
+          className="rounded-xl bg-red-300 p-2"
+        >
           <Text>Scroll to Top</Text>
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        ref={flatListRef}
-        refreshControl={
-          <RefreshControl
-            className="mt-1"
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }
-        data={posts}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <Post data={item} />}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          gap: 20,
-          paddingVertical: 30,
-          paddingHorizontal: 20,
-        }}
-      />
+      {!isLoading ? (
+        <FlatList
+          ref={flatListRef}
+          refreshControl={
+            <RefreshControl
+              className="mt-1"
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }
+          data={data}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => <Post data={item} />}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{
+            flexGrow: 1,
+            gap: 20,
+            paddingVertical: 30,
+            paddingHorizontal: 20,
+          }}
+        />
+      ) : (
+        <Loading />
+      )}
     </SafeAreaView>
   );
 }
