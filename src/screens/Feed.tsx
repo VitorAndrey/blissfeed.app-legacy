@@ -35,7 +35,7 @@ export function Feed() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="z-50 h-16 items-center justify-center border-b border-zinc-100 bg-background-light p-2 dark:bg-background-dark">
+      <View className="bg-red z-50 h-16 items-center justify-center border-b border-zinc-100 bg-background-light dark:bg-background-dark">
         <TouchableOpacity
           onPress={scrollToTop}
           className="rounded-xl bg-red-300 p-2"
@@ -48,11 +48,7 @@ export function Feed() {
         <FlatList
           ref={flatListRef}
           refreshControl={
-            <RefreshControl
-              className="mt-1"
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-            />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           data={data}
           showsVerticalScrollIndicator={false}

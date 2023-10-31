@@ -58,7 +58,10 @@ export function CreatePost() {
         </View>
 
         <TouchableOpacity
-          className={`h-12 w-12 items-center justify-center rounded-full bg-primary-light`}
+          disabled={!inputValue}
+          className={`h-12 w-12 items-center justify-center rounded-full pl-1 transition-all
+          ${inputValue ? "bg-primary-light" : "bg-zinc-200"}
+          `}
         >
           <SendHorizonal color="black" size={20} />
         </TouchableOpacity>
