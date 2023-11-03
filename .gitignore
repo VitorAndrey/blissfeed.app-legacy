@@ -36,3 +36,9 @@ yarn-error.*
 
 #Coverage
 coverage/
+
+# Android
+android
+
+# IOS
+ios
