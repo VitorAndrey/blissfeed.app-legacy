@@ -5,7 +5,7 @@ import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 
 import { Text } from "@ui//Text";
 
-export function Splash() {
+export function Welcome() {
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
   function handleNavigateToSignIn() {

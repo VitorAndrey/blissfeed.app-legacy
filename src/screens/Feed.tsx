@@ -1,9 +1,8 @@
 import { useCallback, useRef, useState } from "react";
-import { FlatList, RefreshControl, TouchableOpacity, View } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Text } from "@ui/Text";
 import { Post } from "@layout/Post";
 import { Loading } from "@layout/Loading";
 
@@ -35,15 +34,6 @@ export function Feed() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="bg-red z-50 h-16 items-center justify-center border-b border-zinc-100 bg-background-light dark:bg-background-dark">
-        <TouchableOpacity
-          onPress={scrollToTop}
-          className="rounded-xl bg-red-300 p-2"
-        >
-          <Text>Scroll to Top</Text>
-        </TouchableOpacity>
-      </View>
-
       {!isLoading ? (
         <FlatList
           ref={flatListRef}
