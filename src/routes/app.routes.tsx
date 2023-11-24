@@ -3,11 +3,11 @@ import {
   BottomTabNavigationProp,
 } from "@react-navigation/bottom-tabs";
 
-import { Feed } from "@screens/Feed";
-import { Search } from "@screens/Search";
-import { CreatePost } from "@screens/CreatePost";
-import { Meditate } from "@screens/Meditate";
-import { Profile } from "@screens/Profile";
+import { Feed } from "@screens/app/Feed";
+import { Search } from "@screens/app/Search";
+import { CreatePost } from "@screens/app/CreatePost";
+import { Meditate } from "@screens/app/Meditate";
+import { Profile } from "@screens/app/Profile";
 
 import {
   Coffee,
