@@ -1,17 +1,16 @@
+import { ReactNode } from "react";
 import { Text as NativeText, TextProps as NativeTextProps } from "react-native";
+
 import { twMerge } from "tailwind-merge";
 
 type TextProps = NativeTextProps & {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function Text({ className, children, ...rest }: TextProps) {
   return (
     <NativeText
-      className={twMerge(
-        "text-font-light dark:text-font-dark font-poppins-400",
-        className,
-      )}
+      className={twMerge("font-poppins-400 text-font-light", className)}
       {...rest}
     >
       {children}

@@ -6,18 +6,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Post } from "@layout/Post";
 import { Loading } from "@layout/Loading";
 
-import { getPosts } from "@services/fetchPosts";
-import { useQuery } from "@tanstack/react-query";
-
 export function Feed() {
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-  });
-
   const flatListRef = useRef<FlatList>(null);
+
+  const data: [] = [];
+  const isLoading = false;
 
   function scrollToTop() {
     if (flatListRef.current) {

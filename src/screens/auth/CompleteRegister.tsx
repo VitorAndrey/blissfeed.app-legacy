@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export function CompleteSignUp() {
+export function CompleteRegister() {
   const { handleUserLogged } = useContext(UserContext);
 
   function handleSignIn() {

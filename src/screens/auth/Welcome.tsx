@@ -8,23 +8,23 @@ import { Text } from "@ui//Text";
 export function Welcome() {
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
-  function handleNavigateToSignIn() {
-    navigation.navigate("SignIn");
+  function handleNavigateToRegister() {
+    navigation.navigate("Register");
   }
 
-  function handleNavigateToSignUp() {
-    navigation.navigate("SignUp");
+  function handleNavigateToLogin() {
+    navigation.navigate("Login");
   }
 
   return (
     <View className="flex-1 items-center justify-center">
       <Text className="mb-20 font-happy-monkey text-4xl">Blissfeed</Text>
 
-      <TouchableOpacity onPress={handleNavigateToSignIn} className="mb-4">
+      <TouchableOpacity onPress={handleNavigateToRegister} className="mb-4">
         <Text>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleNavigateToSignUp}>
+      <TouchableOpacity onPress={handleNavigateToLogin}>
         <Text>Cadastro</Text>
       </TouchableOpacity>
     </View>

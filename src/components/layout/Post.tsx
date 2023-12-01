@@ -1,44 +1,17 @@
+import { Image, View, ViewProps } from "react-native";
+
+import { Post as PostType } from "@models/index";
+
 import { Text } from "@ui/Text";
-import { Image, View } from "react-native";
+import { twMerge } from "tailwind-merge";
 
-interface Post {
-  id: string;
-  authorName: string;
-  authorPicture: string;
-  content: string;
-  interactions: {
-    likes: number;
-    reposts: number;
-  };
-  comments: Comment[];
-}
+type PostProps = ViewProps & {
+  data: PostType;
+};
 
-interface Comment {
-  id: string;
-  postId: string;
-  authorName: string;
-  authorPicture: string;
-  content: string;
-  interactions: {
-    likes: number;
-  };
-  replies: Reply[];
-}
-
-interface Reply {
-  id: string;
-  commentId: string;
-  authorName: string;
-  authorPicture: string;
-  content: string;
-  interactions: {
-    likes: number;
-  };
-}
-
-export function Post({ data }: { data: Post }) {
+export function Post({ data, className, ...rest }: PostProps) {
   return (
-    <View>
+    <View className={twMerge("")} {...rest}>
       <View className="flex-row items-center gap-2">
         <Image
           className="h-8 w-8 rounded-full"

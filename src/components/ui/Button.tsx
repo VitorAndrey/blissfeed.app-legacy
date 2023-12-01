@@ -12,7 +12,7 @@ export function Button({ className, children, ...rest }: IconButtonProps) {
   return (
     <Pressable
       className={twMerge(
-        "h-12 items-center justify-center rounded-xl bg-primary px-6",
+        "bg-primary h-10 items-center justify-center rounded-xl px-6",
         className,
       )}
       {...rest}

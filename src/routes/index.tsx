@@ -1,19 +1,28 @@
-import { View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { useContext } from "react";
+
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
-import { useContext } from "react";
+
 import { UserContext } from "@contexts//UserContext";
+
+import colors from "src/theme/colors";
 
 export function Routes() {
   const { isUserLogged } = useContext(UserContext);
 
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: colors.background.light,
+    },
+  };
+
   return (
-    <View className="flex-1 bg-background-light pt-4 dark:bg-background-dark">
-      <NavigationContainer>
-        {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
-      </NavigationContainer>
-    </View>
+    <NavigationContainer theme={MyTheme}>
+      {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
+    </NavigationContainer>
   );
 }

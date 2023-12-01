@@ -1,23 +1,23 @@
 import "react-native-gesture-handler";
 
+import { useColorScheme } from "nativewind";
+
+import { StatusBar } from "expo-status-bar";
+
 import {
   useFonts,
   HappyMonkey_400Regular,
 } from "@expo-google-fonts/happy-monkey";
-
-import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 import { Itim_400Regular } from "@expo-google-fonts/itim";
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
-import { useColorScheme } from "nativewind";
-
-import { AppProvider } from "@layout//AppProvider";
-import { Loading } from "@layout//Loading";
 import { Routes } from "@routes/index";
 
-import { StatusBar } from "expo-status-bar";
+import { Loading } from "@layout/Loading";
+import { AppProvider } from "@layout/AppProvider";
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     HappyMonkey_400Regular,
     Poppins_400Regular,
     Itim_400Regular,

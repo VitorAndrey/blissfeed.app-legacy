@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
@@ -20,7 +22,7 @@ import {
 import { useColorScheme } from "nativewind";
 
 import colors from "src/theme/colors";
-import { useContext } from "react";
+
 import { SearchContext } from "@contexts/SearchContext";
 
 export type AppRoutes = {
