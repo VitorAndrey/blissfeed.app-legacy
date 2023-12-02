@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { useColorScheme } from "nativewind";
@@ -24,7 +25,9 @@ export function Routes() {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
+      <SafeAreaView className="flex-1">
+        {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
+      </SafeAreaView>
     </NavigationContainer>
   );
 }

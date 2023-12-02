@@ -16,23 +16,28 @@ type IconButtonProps = {
   textProps?: TextProps & {
     textClass?: ClassNameValue;
   };
+  underline?: boolean;
 };
 
-export function Button({
+export function TextButton({
   touchableOpacityProps,
   textProps,
+  underline = false,
   children,
 }: IconButtonProps) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      className={twMerge(
-        "bg-primary h-10 w-full items-center justify-center rounded-3xl bg-theme-primary px-2",
-        touchableOpacityProps?.containerClass,
-      )}
+      className={twMerge("", touchableOpacityProps?.containerClass)}
       {...touchableOpacityProps}
     >
-      <Text className={twMerge("", textProps?.textClass)} {...textProps}>
+      <Text
+        className={twMerge(
+          `${underline && "underline"} text-theme-primary`,
+          textProps?.textClass,
+        )}
+        {...textProps}
+      >
         {children}
       </Text>
     </TouchableOpacity>

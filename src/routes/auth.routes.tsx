@@ -23,7 +23,10 @@ export function AuthRoutes() {
   return (
     <Navigator
       initialRouteName="Welcome"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        animation: "none",
+      }}
     >
       <Screen name="Welcome" component={Welcome} />
       <Screen name="Login" component={Login} />

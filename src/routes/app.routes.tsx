@@ -15,11 +15,11 @@ import { Search } from "@screens/app/Search";
 import { SearchContext } from "@contexts/SearchContext";
 
 import {
-  Coffee,
-  Home,
-  PenSquare,
+  CoffeeIcon,
+  HomeIcon,
+  PenSquareIcon,
   SearchIcon,
-  User2,
+  User2Icon,
 } from "lucide-react-native";
 
 export type AppRoutes = {
@@ -39,14 +39,10 @@ export function AppRoutes() {
   const { colorScheme } = useColorScheme();
 
   const tabBarActiveTintColor =
-    colorScheme === "light"
-      ? colors.activeTabBarIcon.light
-      : colors.activeTabBarIcon.dark;
+    colorScheme === "light" ? colors.theme.white : colors.theme.black;
 
   const tabBarInactiveTintColor =
-    colorScheme === "light"
-      ? colors.inactiveTabBarIcon.light
-      : colors.inactiveTabBarIcon.dark;
+    colorScheme === "light" ? colors.theme.black : colors.theme.white;
 
   return (
     <Navigator
@@ -69,9 +65,10 @@ export function AppRoutes() {
         name="Feed"
         component={Feed}
         options={{
-          tabBarIcon: ({ color }) => <Home color={color} />,
+          tabBarIcon: ({ color }) => <HomeIcon color={color} />,
         }}
       />
+
       <Screen
         name="Search"
         component={Search}
@@ -85,26 +82,29 @@ export function AppRoutes() {
           },
         }}
       />
+
       <Screen
         name="CreatePost"
         component={CreatePost}
         options={{
-          tabBarIcon: ({ color }) => <PenSquare color={color} />,
+          tabBarIcon: ({ color }) => <PenSquareIcon color={color} />,
           tabBarStyle: { display: "none" },
         }}
       />
+
       <Screen
         name="Meditate"
         component={Meditate}
         options={{
-          tabBarIcon: ({ color }) => <Coffee color={color} />,
+          tabBarIcon: ({ color }) => <CoffeeIcon color={color} />,
         }}
       />
+
       <Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({ color }) => <User2 color={color} />,
+          tabBarIcon: ({ color }) => <User2Icon color={color} />,
         }}
       />
     </Navigator>

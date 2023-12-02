@@ -2,7 +2,11 @@
 import "react-native-gesture-handler";
 /* eslint-enable simple-import-sort/imports */
 
-import { Inter_400Regular, useFonts } from "@expo-google-fonts/inter";
+import {
+  Inter_400Regular,
+  Inter_600SemiBold,
+  useFonts,
+} from "@expo-google-fonts/inter";
 import { Itim_400Regular } from "@expo-google-fonts/itim";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
@@ -15,6 +19,7 @@ import { Loading } from "@components/layout/Loading";
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
+    Inter_600SemiBold,
     Itim_400Regular,
   });
 
