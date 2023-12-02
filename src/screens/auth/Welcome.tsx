@@ -1,9 +1,10 @@
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 
-import { Text } from "@ui//Text";
+import { Text } from "@components/ui//Text";
 
 export function Welcome() {
   const navigation = useNavigation<AuthNavigationRoutesProps>();

@@ -3,10 +3,10 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 
-import { Welcome } from "@screens/auth/Welcome";
+import { CompleteRegister } from "@screens/auth/CompleteRegister";
 import { Login } from "@screens/auth/Login";
 import { Register } from "@screens/auth/Register";
-import { CompleteRegister } from "@screens/auth/CompleteRegister";
+import { Welcome } from "@screens/auth/Welcome";
 
 export type AuthRoutes = {
   Welcome: undefined;

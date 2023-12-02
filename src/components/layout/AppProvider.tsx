@@ -1,11 +1,11 @@
+import { View } from "react-native";
 import {
-  SafeAreaProvider,
   initialWindowMetrics,
+  SafeAreaProvider,
 } from "react-native-safe-area-context";
 
-import { View } from "react-native";
-import { UserContextProvider } from "@contexts/UserContext";
 import { SearchContextProvider } from "@contexts/SearchContext";
+import { UserContextProvider } from "@contexts/UserContext";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (

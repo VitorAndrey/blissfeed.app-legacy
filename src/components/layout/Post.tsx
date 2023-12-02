@@ -1,9 +1,10 @@
 import { Image, View, ViewProps } from "react-native";
 
+import { twMerge } from "tailwind-merge";
+
 import { Post as PostType } from "@models/index";
 
-import { Text } from "@ui/Text";
-import { twMerge } from "tailwind-merge";
+import { Text } from "@components/ui/Text";
 
 type PostProps = ViewProps & {
   data: PostType;
@@ -11,7 +12,7 @@ type PostProps = ViewProps & {
 
 export function Post({ data, className, ...rest }: PostProps) {
   return (
-    <View className={twMerge("")} {...rest}>
+    <View className={twMerge("", className)} {...rest}>
       <View className="flex-row items-center gap-2">
         <Image
           className="h-8 w-8 rounded-full"

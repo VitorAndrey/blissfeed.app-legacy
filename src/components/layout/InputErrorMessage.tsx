@@ -3,7 +3,7 @@ import { View, ViewProps } from "react-native";
 
 import { twMerge } from "tailwind-merge";
 
-import { Text } from "@ui/Text";
+import { Text } from "@components/ui/Text";
 
 type InputErrorMessageProps = ViewProps & {
   message: string | undefined;

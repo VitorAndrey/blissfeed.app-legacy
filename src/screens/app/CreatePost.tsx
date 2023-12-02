@@ -1,9 +1,12 @@
-import { useNavigation } from "@react-navigation/native";
-import { Text } from "@ui/Text";
-import { Mic, MicOff, SendHorizonal, X } from "lucide-react-native";
 import { useState } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { useNavigation } from "@react-navigation/native";
+
+import { Mic, MicOff, SendHorizonal, X } from "lucide-react-native";
+
+import { Text } from "@components/ui/Text";
 
 export function CreatePost() {
   const [isRecording, setIsRecording] = useState<boolean>(false);

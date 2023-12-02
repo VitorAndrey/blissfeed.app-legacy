@@ -1,22 +1,24 @@
 import { useContext } from "react";
 
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { useColorScheme } from "nativewind";
+import colors from "src/theme/colors";
+
+import { UserContext } from "@contexts//UserContext";
 
 import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
-import { UserContext } from "@contexts//UserContext";
-
-import colors from "src/theme/colors";
-
 export function Routes() {
   const { isUserLogged } = useContext(UserContext);
+  const { colorScheme } = useColorScheme();
 
   const MyTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: colors.background.light,
+      background:
+        colorScheme === "light" ? colors.theme.white : colors.theme.black,
     },
   };
 

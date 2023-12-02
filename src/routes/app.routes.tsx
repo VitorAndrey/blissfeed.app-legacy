@@ -1,15 +1,18 @@
 import { useContext } from "react";
 
 import {
-  createBottomTabNavigator,
   BottomTabNavigationProp,
+  createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
+import { useColorScheme } from "nativewind";
+import colors from "src/theme/colors";
 
-import { Feed } from "@screens/app/Feed";
-import { Search } from "@screens/app/Search";
 import { CreatePost } from "@screens/app/CreatePost";
+import { Feed } from "@screens/app/Feed";
 import { Meditate } from "@screens/app/Meditate";
 import { Profile } from "@screens/app/Profile";
+import { Search } from "@screens/app/Search";
+import { SearchContext } from "@contexts/SearchContext";
 
 import {
   Coffee,
@@ -18,12 +21,6 @@ import {
   SearchIcon,
   User2,
 } from "lucide-react-native";
-
-import { useColorScheme } from "nativewind";
-
-import colors from "src/theme/colors";
-
-import { SearchContext } from "@contexts/SearchContext";
 
 export type AppRoutes = {
   Feed: undefined;

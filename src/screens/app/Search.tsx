@@ -1,17 +1,18 @@
 import { useCallback, useContext, useRef, useState } from "react";
 import {
+  FlatList,
+  Keyboard,
+  TextInput,
   TouchableOpacity,
   View,
-  TextInput,
-  Keyboard,
-  FlatList,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { SearchContext } from "@contexts/SearchContext";
 
 import { ArrowLeft } from "lucide-react-native";
 
-import { SafeAreaView } from "react-native-safe-area-context";
-import { SearchContext } from "@contexts/SearchContext";
-import { Text } from "@ui/Text";
+import { Text } from "@components/ui/Text";
 
 export function Search() {
   const { isSearching, handleStartSearching, handleStopSearching } =

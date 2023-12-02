@@ -1,10 +1,13 @@
 import { ReactNode, useState } from "react";
-import { TextInput, View, ViewProps, TextInputProps } from "react-native";
+import { TextInput, TextInputProps, View, ViewProps } from "react-native";
 
-import { twMerge, ClassNameValue } from "tailwind-merge";
-import { IconButton } from "./IconButton";
-import colors from "src/theme/colors";
+import { ClassNameValue, twMerge } from "tailwind-merge";
+
 import { EyeIcon, EyeOffIcon } from "lucide-react-native";
+
+import colors from "@theme/colors";
+
+import { IconButton } from "./IconButton";
 
 type InputProps = {
   containerProps?: ViewProps & {
@@ -15,20 +18,22 @@ type InputProps = {
   };
   label?: string;
   icon?: () => ReactNode;
-  searchInput: boolean;
+  searchInput?: boolean;
 };
 
 export function Input({
   containerProps,
   inputProps,
   icon,
-  searchInput,
+  searchInput = false,
 }: InputProps) {
   const [hideChars, setHideChars] = useState<boolean>(true);
 
   function handleToggleHidden() {
     setHideChars((prev) => !prev);
   }
+
+  const iconColor = "";
 
   return (
     <View
@@ -54,9 +59,9 @@ export function Input({
           className="h-10 w-10 items-center justify-center"
         >
           {hideChars ? (
-            <EyeIcon color={colors.activeTabBarIcon.light} size={18} />
+            <EyeIcon color={iconColor} size={18} />
           ) : (
-            <EyeOffIcon color={colors.activeTabBarIcon.light} size={18} />
+            <EyeOffIcon color={iconColor} size={18} />
           )}
         </IconButton>
       )}

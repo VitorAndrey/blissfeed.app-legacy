@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 type UserContextType = {
   isUserLogged: boolean;

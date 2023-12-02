@@ -1,8 +1,10 @@
-import { UserContext } from "@contexts/UserContext";
-import { Text } from "@ui//Text";
 import { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { UserContext } from "@contexts/UserContext";
+
+import { Text } from "@components/ui//Text";
 
 export function CompleteRegister() {
   const { handleUserLogged } = useContext(UserContext);

@@ -10,7 +10,10 @@ type TextProps = NativeTextProps & {
 export function Text({ className, children, ...rest }: TextProps) {
   return (
     <NativeText
-      className={twMerge("font-poppins-400 text-font-light", className)}
+      className={twMerge(
+        "font-inter-400 text-theme-gray-dark dark:text-theme-gray-light",
+        className,
+      )}
       {...rest}
     >
       {children}

@@ -1,29 +1,25 @@
+/* eslint-disable simple-import-sort/imports */
 import "react-native-gesture-handler";
+/* eslint-enable simple-import-sort/imports */
 
-import { useColorScheme } from "nativewind";
-
-import { StatusBar } from "expo-status-bar";
-
-import {
-  useFonts,
-  HappyMonkey_400Regular,
-} from "@expo-google-fonts/happy-monkey";
+import { Inter_400Regular, useFonts } from "@expo-google-fonts/inter";
 import { Itim_400Regular } from "@expo-google-fonts/itim";
-import { Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "nativewind";
 
 import { Routes } from "@routes/index";
 
-import { Loading } from "@layout/Loading";
-import { AppProvider } from "@layout/AppProvider";
+import { AppProvider } from "@components/layout/AppProvider";
+import { Loading } from "@components/layout/Loading";
+import { Button } from "@components/ui/Button";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    HappyMonkey_400Regular,
-    Poppins_400Regular,
+    Inter_400Regular,
     Itim_400Regular,
   });
 
-  const { colorScheme } = useColorScheme();
+  const { colorScheme, toggleColorScheme } = useColorScheme();
 
   return (
     <AppProvider>
@@ -34,6 +30,13 @@ export default function App() {
       />
 
       {fontsLoaded ? <Routes /> : <Loading />}
+
+      <Button
+        className="absolute top-0 left-0 bg-red-300"
+        onPress={toggleColorScheme}
+      >
+        Theme
+      </Button>
     </AppProvider>
   );
 }

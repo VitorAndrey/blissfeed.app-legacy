@@ -1,5 +1,6 @@
-import { View, ActivityIndicator, ViewProps } from "react-native";
+import { ActivityIndicator, View, ViewProps } from "react-native";
 
+import colors from "src/theme/colors";
 import { twMerge } from "tailwind-merge";
 
 type LoadingProps = ViewProps & {};
@@ -10,7 +11,7 @@ export function Loading({ className, ...rest }: LoadingProps) {
       className={twMerge("flex-1 items-center justify-center", className)}
       {...rest}
     >
-      <ActivityIndicator animating />
+      <ActivityIndicator animating color={colors.theme.primary} />
     </View>
   );
 }

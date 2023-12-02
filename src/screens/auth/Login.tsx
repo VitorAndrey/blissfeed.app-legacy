@@ -1,21 +1,20 @@
 import { useContext, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
-
-import { UserContext } from "@contexts/UserContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Text } from "@ui/Text";
-import { Input } from "@ui/Input";
-import { Button } from "@ui/Button";
-
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-import { loginUser } from "@services/authentication";
-import { Loading } from "@layout/Loading";
 import { LoginUser } from "@models/index";
-import { InputErrorMessage } from "@layout/InputErrorMessage";
+import { UserContext } from "@contexts/UserContext";
+import { loginUser } from "@services/authentication";
+
+import { InputErrorMessage } from "@components/layout/InputErrorMessage";
+import { Loading } from "@components/layout/Loading";
+import { Button } from "@components/ui/Button";
+import { Input } from "@components/ui/Input";
+import { Text } from "@components/ui/Text";
 
 const schema = yup
   .object({

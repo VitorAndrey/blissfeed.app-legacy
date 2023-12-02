@@ -1,32 +1,14 @@
 module.exports = {
-  primary: {
-    light: "#FBE0C3",
-    dark: "#FBE0C3",
-  },
-  secondary: {
-    light: "#FBE0C3",
-    dark: "#FBE0C3",
-  },
-  activeTabBarIcon: {
-    light: "#222222",
-    dark: "#cccccc",
-  },
-  inactiveTabBarIcon: {
-    light: "#aaaaaa",
-    dark: "#666666",
-  },
+  theme: {
+    primary: "#f9622e",
 
-  border: {
-    light: "#aaaaaa",
-    dark: "#666666",
-  },
+    black: "#111111",
+    white: "#ffffff",
 
-  font: {
-    light: "#222222",
-    dark: "#fefefe",
-  },
-  background: {
-    light: "#fefefe",
-    dark: "#222222",
+    gray: {
+      light: "#f4f4f4",
+      medium: "#797979",
+      dark: "#242424",
+    },
   },
 };
