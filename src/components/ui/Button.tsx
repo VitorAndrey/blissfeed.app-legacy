@@ -1,23 +1,24 @@
-import { Pressable, PressableProps } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { twMerge } from "tailwind-merge";
 
 import { Text } from "./Text";
 
-type IconButtonProps = PressableProps & {
+type IconButtonProps = TouchableOpacityProps & {
   children: React.ReactNode;
 };
 
 export function Button({ className, children, ...rest }: IconButtonProps) {
   return (
-    <Pressable
+    <TouchableOpacity
+      activeOpacity={0.8}
       className={twMerge(
-        "bg-primary h-10 items-center justify-center rounded-xl px-6",
+        "bg-primary h-10 w-full items-center justify-center rounded-xl px-2",
         className,
       )}
       {...rest}
     >
       <Text className="font-semibold">{children}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }

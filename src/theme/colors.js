@@ -10,5 +10,8 @@ module.exports = {
       medium: "#797979",
       dark: "#242424",
     },
+
+    error: "#bb2124",
+    success: "#22bb33",
   },
 };

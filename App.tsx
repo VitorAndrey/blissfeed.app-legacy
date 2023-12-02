@@ -11,7 +11,6 @@ import { Routes } from "@routes/index";
 
 import { AppProvider } from "@components/layout/AppProvider";
 import { Loading } from "@components/layout/Loading";
-import { Button } from "@components/ui/Button";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +18,7 @@ export default function App() {
     Itim_400Regular,
   });
 
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
   return (
     <AppProvider>
@@ -30,13 +29,6 @@ export default function App() {
       />
 
       {fontsLoaded ? <Routes /> : <Loading />}
-
-      <Button
-        className="absolute top-0 left-0 bg-red-300"
-        onPress={toggleColorScheme}
-      >
-        Theme
-      </Button>
     </AppProvider>
   );
 }

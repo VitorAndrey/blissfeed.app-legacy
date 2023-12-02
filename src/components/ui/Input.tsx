@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import { TextInput, TextInputProps, View, ViewProps } from "react-native";
 
+import { useColorScheme } from "nativewind";
 import { ClassNameValue, twMerge } from "tailwind-merge";
 
 import { EyeIcon, EyeOffIcon } from "lucide-react-native";
@@ -27,25 +28,28 @@ export function Input({
   icon,
   searchInput = false,
 }: InputProps) {
+  const { colorScheme } = useColorScheme();
+
   const [hideChars, setHideChars] = useState<boolean>(true);
 
   function handleToggleHidden() {
     setHideChars((prev) => !prev);
   }
 
-  const iconColor = "";
+  const iconColor =
+    colorScheme === "light" ? colors.theme.black : colors.theme.white;
 
   return (
     <View
       className={twMerge(
-        "h-10 flex-row items-center rounded-2xl px-4",
+        "h-10 w-full flex-row items-center rounded-2xl px-4",
         containerProps?.containerClass,
       )}
       {...containerProps}
     >
       <TextInput
         className={twMerge(
-          "h-full flex-1 font-poppins-400 text-base",
+          "font-poppins-400 h-full flex-1 text-base",
           inputProps?.inputClass,
         )}
         {...inputProps}
@@ -54,10 +58,7 @@ export function Input({
       {icon && !searchInput && icon()}
 
       {searchInput && (
-        <IconButton
-          onPress={handleToggleHidden}
-          className="h-10 w-10 items-center justify-center"
-        >
+        <IconButton onPress={handleToggleHidden}>
           {hideChars ? (
             <EyeIcon color={iconColor} size={18} />
           ) : (

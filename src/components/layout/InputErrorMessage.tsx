@@ -16,7 +16,7 @@ export function InputErrorMessage({
 }: InputErrorMessageProps) {
   return (
     <View className={twMerge("h-6", className)} {...rest}>
-      {message && <Text className="text-theme-red-500 text-xs">{message}</Text>}
+      {message && <Text className="text-theme-error text-xs">{message}</Text>}
     </View>
   );
 }
