@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView, View } from "react-native";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +15,8 @@ import { Loading } from "@components/layout/Loading";
 import { OnBoarding } from "@components/layout/OnBoarding";
 import { Button } from "@components/ui/Button";
 import { Input } from "@components/ui/Input";
+import { Text } from "@components/ui/Text";
+import { TextButton } from "@components/ui/TextButton";
 
 const schema = yup
   .object({
@@ -75,92 +76,124 @@ export function Register() {
   }
 
   return (
-    <SafeAreaView className="flex-1">
+    <View className="flex-1 py-6">
+      <View className="items-center px-10 pb-4">
+        <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-xl">
+          Create Account
+        </Text>
+        <Text className="text-center text-xs text-theme-gray-medium">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        </Text>
+      </View>
+
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
           flexGrow: 1,
+          justifyContent: "center",
         }}
         showsVerticalScrollIndicator={false}
       >
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              inputProps={{
-                onChangeText: onChange,
-                onBlur: onBlur,
-                value: value,
-              }}
-              label="Nome:"
-            />
-          )}
-          name="name"
-        />
-        <InputErrorMessage message={errors.name?.message} />
+        <View className="py-4 px-10">
+          <Text>Name</Text>
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                inputProps={{
+                  onChangeText: onChange,
+                  onBlur: onBlur,
+                  value: value,
+                  placeholder: "Ex. Jhon Doe",
+                }}
+              />
+            )}
+            name="name"
+          />
+          <InputErrorMessage message={errors.name?.message} />
 
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              inputProps={{
-                onChangeText: onChange,
-                onBlur: onBlur,
-                value: value,
-              }}
-              label="Email:"
-            />
-          )}
-          name="email"
-        />
-        <InputErrorMessage message={errors.email?.message} />
+          <Text>Email</Text>
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                inputProps={{
+                  onChangeText: onChange,
+                  onBlur: onBlur,
+                  value: value,
+                  placeholder: "example@gmail.com",
+                }}
+              />
+            )}
+            name="email"
+          />
+          <InputErrorMessage message={errors.email?.message} />
 
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              inputProps={{
-                onChangeText: onChange,
-                onBlur: onBlur,
-                value: value,
-              }}
-              label="Senha:"
-            />
-          )}
-          name="password"
-        />
-        <InputErrorMessage message={errors.password?.message} />
+          <Text>Password</Text>
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                inputProps={{
+                  onChangeText: onChange,
+                  onBlur: onBlur,
+                  value: value,
+                  placeholder: "********",
+                }}
+                secureInput
+              />
+            )}
+            name="password"
+          />
+          <InputErrorMessage message={errors.password?.message} />
 
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              inputProps={{
-                onChangeText: onChange,
-                onBlur: onBlur,
-                value: value,
-              }}
-              label="Confirmar senha:"
-            />
-          )}
-          name="confirmPassword"
-        />
-        <InputErrorMessage message={errors.confirmPassword?.message} />
+          <View className="mb-8 flex-row gap-2">
+            <View className="h-4 w-4 rounded-sm bg-theme-gray-medium"></View>
+            <Text>Agree with Terms and conditions</Text>
+          </View>
 
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Button
-            touchableOpacityProps={{
-              onPress: handleSubmit(onSubmit),
-            }}
-          >
-            Avançar
-          </Button>
-        )}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Button
+              touchableOpacityProps={{
+                onPress: handleSubmit(onSubmit),
+              }}
+              textProps={{
+                textClass: "text-theme-white",
+              }}
+            >
+              Avançar
+            </Button>
+          )}
+
+          <View className="flex-row items-center gap-2 py-8 px-8">
+            <View className="h-px flex-1 bg-theme-gray-medium"></View>
+            <Text className="text-xs">Or sign up with</Text>
+            <View className="h-px flex-1 bg-theme-gray-medium"></View>
+          </View>
+
+          <View className="mb-8 flex-row items-center justify-center gap-3">
+            <View className="h-12 w-12 rounded-full border"></View>
+            <View className="h-12 w-12 rounded-full border"></View>
+            <View className="h-12 w-12 rounded-full border"></View>
+          </View>
+
+          <View className="flex-row items-center justify-center">
+            <Text className="mr-1 text-xs">Already hava an account?</Text>
+            <TextButton
+              underline
+              touchableOpacityProps={{
+                onPress: () => {},
+              }}
+            >
+              SignIn!
+            </TextButton>
+          </View>
+        </View>
       </ScrollView>
 
       <OnBoarding />
-    </SafeAreaView>
+    </View>
   );
 }

@@ -52,7 +52,6 @@ export function OnBoarding() {
         fontSize: 14,
         lineHeight: 20,
       }}
-      pageStyle={{}}
       pages={pages}
       type={"fullscreen"}
     />

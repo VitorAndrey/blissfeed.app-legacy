@@ -56,7 +56,7 @@ export function Welcome() {
           Let&apos;s Get Started
         </Button>
 
-        <View className="flex-row items-center">
+        <View className="flex-row items-center justify-center">
           <Text className="mr-1">Already hava an account?</Text>
           <TextButton
             underline

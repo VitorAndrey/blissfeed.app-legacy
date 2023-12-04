@@ -19,14 +19,14 @@ type InputProps = {
   };
   label?: string;
   icon?: () => ReactNode;
-  searchInput?: boolean;
+  secureInput?: boolean;
 };
 
 export function Input({
   containerProps,
   inputProps,
   icon,
-  searchInput = false,
+  secureInput = false,
 }: InputProps) {
   const { colorScheme } = useColorScheme();
 
@@ -42,22 +42,23 @@ export function Input({
   return (
     <View
       className={twMerge(
-        "h-10 w-full flex-row items-center rounded-2xl px-4",
+        "h-10 w-full flex-row items-center rounded-lg bg-theme-gray-light px-4",
         containerProps?.containerClass,
       )}
       {...containerProps}
     >
       <TextInput
+        secureTextEntry={secureInput && hideChars}
         className={twMerge(
-          "font-poppins-400 h-full flex-1 text-base",
+          "font-poppins-400 h-full flex-1 text-sm",
           inputProps?.inputClass,
         )}
         {...inputProps}
       />
 
-      {icon && !searchInput && icon()}
+      {icon && !secureInput && icon()}
 
-      {searchInput && (
+      {secureInput && (
         <IconButton onPress={handleToggleHidden}>
           {hideChars ? (
             <EyeIcon color={iconColor} size={18} />
