@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Image, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -26,10 +26,15 @@ export function Welcome() {
         <Text className="font-itim-400 text-3xl">Blissfeed</Text>
       </View>
 
-      <View className="flex-1"></View>
+      <View className="flex-1 p-8">
+        <Image
+          className="h-full w-full"
+          source={{ uri: "https://github.com/Rick.png" }}
+        />
+      </View>
 
       <View className="items-center px-10">
-        <Text className="font-inter-600 mb-6 max-w-[200px] text-center text-xl">
+        <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-xl">
           Your Premier{" "}
           <Text className="font-inter-600 text-theme-primary">
             Social Connection App
@@ -42,7 +47,10 @@ export function Welcome() {
         </Text>
 
         <Button
-          touchableOpacityProps={{ containerClass: "my-5" }}
+          touchableOpacityProps={{
+            containerClass: "my-5",
+            onPress: handleNavigateToRegister,
+          }}
           textProps={{ textClass: "text-theme-white" }}
         >
           Let&apos;s Get Started
@@ -53,7 +61,7 @@ export function Welcome() {
           <TextButton
             underline
             touchableOpacityProps={{
-              onPress: handleNavigateToRegister,
+              onPress: handleNavigateToLogin,
             }}
           >
             SignIn!

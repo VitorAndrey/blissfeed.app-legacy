@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,9 +13,9 @@ import { registerUser } from "@services/authentication";
 
 import { InputErrorMessage } from "@components/layout/InputErrorMessage";
 import { Loading } from "@components/layout/Loading";
+import { OnBoarding } from "@components/layout/OnBoarding";
 import { Button } from "@components/ui/Button";
 import { Input } from "@components/ui/Input";
-import { Text } from "@components/ui/Text";
 
 const schema = yup
   .object({
@@ -151,13 +151,16 @@ export function Register() {
           <Loading />
         ) : (
           <Button
-            className="bg-theme-pink-300 mt-6 w-28  self-center bg-transparent text-xl"
-            onPress={handleSubmit(onSubmit)}
+            touchableOpacityProps={{
+              onPress: handleSubmit(onSubmit),
+            }}
           >
             Avançar
           </Button>
         )}
       </ScrollView>
+
+      <OnBoarding />
     </SafeAreaView>
   );
 }
