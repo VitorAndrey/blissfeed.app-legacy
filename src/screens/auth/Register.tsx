@@ -3,20 +3,18 @@ import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { InputErrorMessage } from "@layout/InputErrorMessage";
+import { Loading } from "@layout/Loading";
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "@ui/Button";
+import { Input } from "@ui/Input";
+import { Text } from "@ui/Text";
+import { TextButton } from "@ui/TextButton";
 import * as yup from "yup";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 import { RegisterUser } from "@models/index";
 import { registerUser } from "@services/authentication";
-
-import { InputErrorMessage } from "@components/layout/InputErrorMessage";
-import { Loading } from "@components/layout/Loading";
-import { OnBoarding } from "@components/layout/OnBoarding";
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Input";
-import { Text } from "@components/ui/Text";
-import { TextButton } from "@components/ui/TextButton";
 
 const schema = yup
   .object({
@@ -192,8 +190,6 @@ export function Register() {
           </View>
         </View>
       </ScrollView>
-
-      <OnBoarding />
     </View>
   );
 }

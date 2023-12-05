@@ -13,8 +13,8 @@ import { useColorScheme } from "nativewind";
 
 import { Routes } from "@routes/index";
 
-import { AppProvider } from "@components/layout/AppProvider";
-import { Loading } from "@components/layout/Loading";
+import { AppProvider } from "@layout/AppProvider";
+import { Loading } from "@layout/Loading";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

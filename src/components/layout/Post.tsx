@@ -1,10 +1,9 @@
 import { Image, View, ViewProps } from "react-native";
 
+import { Text } from "@ui/Text";
 import { twMerge } from "tailwind-merge";
 
 import { Post as PostType } from "@models/index";
-
-import { Text } from "@components/ui/Text";
 
 type PostProps = ViewProps & {
   data: PostType;

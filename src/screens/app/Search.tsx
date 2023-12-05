@@ -8,11 +8,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Text } from "@ui/Text";
+
 import { SearchContext } from "@contexts/SearchContext";
 
 import { ArrowLeft } from "lucide-react-native";
-
-import { Text } from "@components/ui/Text";
 
 export function Search() {
   const { isSearching, handleStartSearching, handleStopSearching } =

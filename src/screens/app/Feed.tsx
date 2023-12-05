@@ -2,8 +2,8 @@ import { useCallback, useRef, useState } from "react";
 import { FlatList, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Loading } from "@components/layout/Loading";
-import { Post } from "@components/layout/Post";
+import { Loading } from "@layout/Loading";
+import { Post } from "@layout/Post";
 
 export function Feed() {
   const [refreshing, setRefreshing] = useState<boolean>(false);

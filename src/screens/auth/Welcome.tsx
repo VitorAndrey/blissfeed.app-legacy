@@ -1,18 +1,17 @@
 import { Image, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "@ui/Button";
+import { Text } from "@ui/Text";
+import { TextButton } from "@ui/TextButton";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-
-import { Button } from "@components/ui/Button";
-import { Text } from "@components/ui/Text";
-import { TextButton } from "@components/ui/TextButton";
 
 export function Welcome() {
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
-  function handleNavigateToRegister() {
-    navigation.navigate("Register");
+  function handleNavigateToOnBoarding() {
+    navigation.navigate("OnBoarding");
   }
 
   function handleNavigateToLogin() {
@@ -49,7 +48,7 @@ export function Welcome() {
         <Button
           touchableOpacityProps={{
             containerClass: "my-5",
-            onPress: handleNavigateToRegister,
+            onPress: handleNavigateToOnBoarding,
           }}
           textProps={{ textClass: "text-theme-white" }}
         >
