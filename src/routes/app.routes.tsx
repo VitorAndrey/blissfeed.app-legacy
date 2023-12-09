@@ -10,6 +10,7 @@ import colors from "src/theme/colors";
 import { CreatePost } from "@screens/app/CreatePost";
 import { Feed } from "@screens/app/Feed";
 import { Meditate } from "@screens/app/Meditate";
+import { Onboarding } from "@screens/app/Onboarding";
 import { Profile } from "@screens/app/Profile";
 import { Search } from "@screens/app/Search";
 import { SearchContext } from "@contexts/SearchContext";
@@ -18,11 +19,13 @@ import {
   CoffeeIcon,
   HomeIcon,
   PenSquareIcon,
+  PresentationIcon,
   SearchIcon,
   User2Icon,
 } from "lucide-react-native";
 
 export type AppRoutes = {
+  OnBoarding: undefined;
   Feed: undefined;
   Search: undefined;
   CreatePost: undefined;
@@ -38,6 +41,8 @@ export function AppRoutes() {
   const { isSearching } = useContext(SearchContext);
   const { colorScheme } = useColorScheme();
 
+  const initialRouteName: keyof AppRoutes = "OnBoarding";
+
   const tabBarActiveTintColor =
     colorScheme === "light" ? colors.theme.white : colors.theme.black;
 
@@ -46,7 +51,7 @@ export function AppRoutes() {
 
   return (
     <Navigator
-      initialRouteName="Feed"
+      initialRouteName={initialRouteName}
       sceneContainerStyle={{ backgroundColor: "transparent" }}
       backBehavior="history"
       screenOptions={{
@@ -61,6 +66,15 @@ export function AppRoutes() {
         },
       }}
     >
+      <Screen
+        name="OnBoarding"
+        component={Onboarding}
+        options={{
+          tabBarIcon: ({ color }) => <PresentationIcon color={color} />,
+          tabBarStyle: { display: "none" },
+        }}
+      />
+
       <Screen
         name="Feed"
         component={Feed}

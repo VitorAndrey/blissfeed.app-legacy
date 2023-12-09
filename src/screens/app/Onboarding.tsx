@@ -3,8 +3,11 @@ import { Animated, FlatList, View, ViewToken } from "react-native";
 
 import { OnBoardingItem } from "@layout/OnBoardingItem";
 import { Paginator } from "@layout/Paginator";
+import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "@ui/IconButton";
 import { TextButton } from "@ui/TextButton";
+
+import { AppNavigationRoutesProps } from "@routes/app.routes";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react-native";
 
@@ -17,6 +20,7 @@ type ViewableItemsType = {
 
 export function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(0);
+  const navigation = useNavigation<AppNavigationRoutesProps>();
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -53,9 +57,18 @@ export function Onboarding() {
     },
   ];
 
+  function handleNavigateToFeed() {
+    navigation.navigate("Feed");
+  }
+
   return (
     <View className="flex-1 items-center justify-center">
-      <TextButton touchableOpacityProps={{ containerClass: "p-4 self-end" }}>
+      <TextButton
+        touchableOpacityProps={{
+          containerClass: "p-4 self-end",
+          onPress: handleNavigateToFeed,
+        }}
+      >
         Skip
       </TextButton>
 
@@ -84,7 +97,7 @@ export function Onboarding() {
       <View className="flex-row items-center p-8">
         <View className="h-12 w-12">
           {currentIndex !== 0 && (
-            <IconButton className="h-full w-full rounded-full border">
+            <IconButton className="h-full w-full rounded-full border border-theme-gray-medium">
               <ArrowLeftIcon color={colors.theme.gray.medium} size={20} />
             </IconButton>
           )}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputErrorMessage } from "@layout/InputErrorMessage";
@@ -8,13 +8,17 @@ import { Loading } from "@layout/Loading";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
+import { SocialButton } from "@ui/SocialButton";
 import { Text } from "@ui/Text";
 import { TextButton } from "@ui/TextButton";
 import * as yup from "yup";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
+import GoogleIcon from "@assets/googleIcon.svg";
 import { RegisterUser } from "@models/index";
 import { registerUser } from "@services/authentication";
+
+import { CheckIcon } from "lucide-react-native";
 
 const schema = yup
   .object({
@@ -37,6 +41,8 @@ type FormData = yup.InferType<typeof schema>;
 
 export function Register() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [agreedConditions, setAgreedConditions] = useState<boolean>(false);
+
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
   const {
@@ -61,7 +67,7 @@ export function Register() {
       } satisfies RegisterUser);
 
       reset();
-      navegarLogin();
+      handleNavigateToLogin();
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,31 +75,37 @@ export function Register() {
     }
   };
 
-  function navegarLogin() {
+  function handleNavigateToLogin() {
     navigation.navigate("Login");
   }
 
-  return (
-    <View className="flex-1 py-6">
-      <View className="items-center px-10 pb-4">
-        <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-xl">
-          Create Account
-        </Text>
-        <Text className="text-center text-xs text-theme-gray-medium">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </Text>
-      </View>
+  function handleAgreedConditions() {
+    setAgreedConditions((prev) => !prev);
+  }
 
+  return (
+    <View className="flex-1">
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: "center",
+          paddingVertical: 10,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="py-4 px-10">
-          <Text>Name</Text>
+        <View className="items-center px-10 pb-4">
+          <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-2xl">
+            Criar Conta
+          </Text>
+          <Text className="text-center text-theme-gray-medium">
+            Desabafe, conecte-se e encontre paz. Junte-se à comunidade
+            Blissfeed.
+          </Text>
+        </View>
+
+        <View className="py-4 px-8">
+          <Text>Nome</Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -119,7 +131,7 @@ export function Register() {
                   onChangeText: onChange,
                   onBlur: onBlur,
                   value: value,
-                  placeholder: "example@gmail.com",
+                  placeholder: "exemplo@gmail.com",
                 }}
               />
             )}
@@ -127,7 +139,7 @@ export function Register() {
           />
           <InputErrorMessage message={errors.email?.message} />
 
-          <Text>Password</Text>
+          <Text>Senha</Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -145,13 +157,26 @@ export function Register() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <View className="mb-8 flex-row gap-2">
-            <View className="h-4 w-4 rounded-sm bg-theme-gray-medium"></View>
-            <Text>Agree with Terms and conditions</Text>
+          <View className="mb-8 flex-row items-center">
+            <TouchableOpacity
+              onPress={handleAgreedConditions}
+              className={`h-4 w-4 items-center justify-center rounded-sm ${
+                agreedConditions ? "bg-theme-primary" : "bg-theme-gray-light"
+              }`}
+            >
+              {agreedConditions && <CheckIcon color="white" size={14} />}
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={handleAgreedConditions}
+            >
+              <Text className="mx-2">Aceito os</Text>
+            </TouchableOpacity>
+            <TextButton underline>termos e condições.</TextButton>
           </View>
 
           {isLoading ? (
-            <Loading />
+            <Loading iconSize className="self-center" />
           ) : (
             <Button
               touchableOpacityProps={{
@@ -161,31 +186,31 @@ export function Register() {
                 textClass: "text-theme-white",
               }}
             >
-              Avançar
+              Registrar
             </Button>
           )}
 
           <View className="flex-row items-center gap-2 py-8 px-8">
-            <View className="h-px flex-1 bg-theme-gray-medium"></View>
-            <Text className="text-xs">Or sign up with</Text>
-            <View className="h-px flex-1 bg-theme-gray-medium"></View>
+            <View className="h-px flex-1 bg-theme-gray-light"></View>
+            <Text className="text-xs text-theme-gray-medium">Registre com</Text>
+            <View className="h-px flex-1 bg-theme-gray-light"></View>
           </View>
 
-          <View className="mb-8 flex-row items-center justify-center gap-3">
-            <View className="h-12 w-12 rounded-full border"></View>
-            <View className="h-12 w-12 rounded-full border"></View>
-            <View className="h-12 w-12 rounded-full border"></View>
-          </View>
+          <SocialButton>
+            <GoogleIcon className="h-8 w-8" />
 
-          <View className="flex-row items-center justify-center">
-            <Text className="mr-1 text-xs">Already hava an account?</Text>
+            <Text>Google</Text>
+          </SocialButton>
+
+          <View className="mt-8 flex-row items-center justify-center">
+            <Text className="mr-1 text-xs">Já tem uma conta?</Text>
             <TextButton
               underline
               touchableOpacityProps={{
-                onPress: () => {},
+                onPress: handleNavigateToLogin,
               }}
             >
-              SignIn!
+              Entrar!
             </TextButton>
           </View>
         </View>

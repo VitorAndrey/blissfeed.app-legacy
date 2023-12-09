@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
@@ -8,13 +8,16 @@ import { Loading } from "@layout/Loading";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
+import { SocialButton } from "@ui/SocialButton";
 import { Text } from "@ui/Text";
 import { TextButton } from "@ui/TextButton";
 import * as yup from "yup";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-import { LoginUser } from "@models/index";
-import { loginUser } from "@services/authentication";
+import GoogleIcon from "@assets/googleIcon.svg";
+// import { LoginUser } from "@models/index";
+import { UserContext } from "@contexts/UserContext";
+// import { loginUser } from "@services/authentication";
 
 const schema = yup
   .object({
@@ -32,6 +35,7 @@ type FormData = yup.InferType<typeof schema>;
 
 export function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { handleUpdateUser } = useContext(UserContext);
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
   const {
@@ -47,15 +51,23 @@ export function Login() {
     setIsLoading(true);
 
     const { email, password } = data;
+    console.log(email, password);
 
     try {
-      await loginUser({
-        email,
-        password,
-      } satisfies LoginUser);
+      // const user = await loginUser({
+      //   email,
+      //   password,
+      // } satisfies LoginUser);
+
+      const user = {
+        id: "1",
+        name: "Jhon Doe",
+        email: "jhon@gmail.com",
+        password: "12345678",
+      };
 
       reset();
-      navegarLogin();
+      handleUpdateUser(user);
     } catch (error) {
       console.log(error);
     } finally {
@@ -63,30 +75,30 @@ export function Login() {
     }
   };
 
-  function navegarLogin() {
-    navigation.navigate("Login");
+  function handleNavigateToRegister() {
+    navigation.navigate("Register");
   }
-
   return (
-    <View className="flex-1 py-6">
-      <View className="items-center px-10 pb-4">
-        <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-xl">
-          Create Account
-        </Text>
-        <Text className="text-center text-xs text-theme-gray-medium">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </Text>
-      </View>
-
+    <View className="flex-1">
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: "center",
+          paddingVertical: 10,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="py-4 px-10">
+        <View className="items-center px-10 pb-4">
+          <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-2xl">
+            Bem vindo de volta!
+          </Text>
+          <Text className="text-center text-theme-gray-medium">
+            Sentimos sua falta por aqui... É bom ter você conosco novamente!
+          </Text>
+        </View>
+
+        <View className="py-4 px-8">
           <Text>Email</Text>
           <Controller
             control={control}
@@ -96,7 +108,7 @@ export function Login() {
                   onChangeText: onChange,
                   onBlur: onBlur,
                   value: value,
-                  placeholder: "example@gmail.com",
+                  placeholder: "exemplo@gmail.com",
                 }}
               />
             )}
@@ -104,7 +116,7 @@ export function Login() {
           />
           <InputErrorMessage message={errors.email?.message} />
 
-          <Text>Password</Text>
+          <Text>Senha</Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -122,13 +134,12 @@ export function Login() {
           />
           <InputErrorMessage message={errors.password?.message} />
 
-          <View className="mb-8 flex-row gap-2">
-            <View className="h-4 w-4 rounded-sm bg-theme-gray-medium"></View>
-            <Text>Agree with Terms and conditions</Text>
+          <View className="mb-8 flex-row items-center justify-end">
+            <TextButton underline>Esqueceu a senha?</TextButton>
           </View>
 
           {isLoading ? (
-            <Loading />
+            <Loading iconSize className="self-center" />
           ) : (
             <Button
               touchableOpacityProps={{
@@ -138,31 +149,31 @@ export function Login() {
                 textClass: "text-theme-white",
               }}
             >
-              Avançar
+              Entrar
             </Button>
           )}
 
           <View className="flex-row items-center gap-2 py-8 px-8">
-            <View className="h-px flex-1 bg-theme-gray-medium"></View>
-            <Text className="text-xs">Or sign up with</Text>
-            <View className="h-px flex-1 bg-theme-gray-medium"></View>
+            <View className="h-px flex-1 bg-theme-gray-light"></View>
+            <Text className="text-xs text-theme-gray-medium">Ou entre com</Text>
+            <View className="h-px flex-1 bg-theme-gray-light"></View>
           </View>
 
-          <View className="mb-8 flex-row items-center justify-center gap-3">
-            <View className="h-12 w-12 rounded-full border"></View>
-            <View className="h-12 w-12 rounded-full border"></View>
-            <View className="h-12 w-12 rounded-full border"></View>
-          </View>
+          <SocialButton>
+            <GoogleIcon className="h-8 w-8" />
 
-          <View className="flex-row items-center justify-center">
-            <Text className="mr-1 text-xs">Already hava an account?</Text>
+            <Text>Google</Text>
+          </SocialButton>
+
+          <View className="mt-8 flex-row items-center justify-center">
+            <Text className="mr-1 text-xs">Não tem uma conta?</Text>
             <TextButton
               underline
               touchableOpacityProps={{
-                onPress: () => {},
+                onPress: handleNavigateToRegister,
               }}
             >
-              SignIn!
+              Registrar!
             </TextButton>
           </View>
         </View>

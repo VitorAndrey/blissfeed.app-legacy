@@ -42,7 +42,9 @@ export function Input({
   return (
     <View
       className={twMerge(
-        "h-10 w-full flex-row items-center rounded-lg bg-theme-gray-light px-4",
+        `h-10 w-full flex-row items-center rounded-lg bg-theme-gray-light px-4 ${
+          secureInput && "pr-1"
+        }`,
         containerProps?.containerClass,
       )}
       {...containerProps}

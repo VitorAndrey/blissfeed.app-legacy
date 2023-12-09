@@ -1,6 +1,6 @@
 module.exports = {
   theme: {
-    primary: "#797979",
+    primary: "#f28861",
 
     black: "#111111",
     white: "#ffffff",
@@ -11,7 +11,7 @@ module.exports = {
       dark: "#242424",
     },
 
-    error: "#bb2124",
-    success: "#22bb33",
+    error: "#FF2222",
+    success: "#22FF22",
   },
 };

@@ -1,28 +1,32 @@
 import { createContext, ReactNode, useState } from "react";
 
+// import { useMMKVObject } from "react-native-mmkv";
+import { User } from "@models/index";
+
+// import { storage } from "../../App";
+
 type UserContextType = {
+  user: User | null;
+  handleUpdateUser: (user: User | null) => void;
   isUserLogged: boolean;
-  handleUserLogged: () => void;
-  handleUserUnlogged: () => void;
 };
 
 export const UserContext = createContext({} as UserContextType);
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
-  const [isUserLogged, setIsUserLogged] = useState<boolean>(false);
+  // const [user, setUser] = useMMKVObject<User>("user");
+  const [user, setUser] = useState<User | null>(null);
 
-  function handleUserLogged() {
-    setIsUserLogged(true);
+  function handleUpdateUser(user: User | null) {
+    if (!user) return setUser(null);
+
+    setUser(user);
   }
 
-  function handleUserUnlogged() {
-    setIsUserLogged(false);
-  }
+  const isUserLogged = user ? true : false;
 
   return (
-    <UserContext.Provider
-      value={{ isUserLogged, handleUserLogged, handleUserUnlogged }}
-    >
+    <UserContext.Provider value={{ isUserLogged, handleUpdateUser, user }}>
       {children}
     </UserContext.Provider>
   );

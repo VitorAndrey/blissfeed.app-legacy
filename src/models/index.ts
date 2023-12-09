@@ -3,9 +3,9 @@ export type User = {
   name: string;
   email: string;
   password: string;
-  imageUrl: string;
-  posts: Post[];
-  conversations: Conversation[];
+  imageUrl?: string;
+  posts?: Post[];
+  conversations?: Conversation[];
 };
 
 export type RegisterUser = {
