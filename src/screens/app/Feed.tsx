@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { FlatList, RefreshControl } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList, RefreshControl, View } from "react-native";
 
 import { Loading } from "@layout/Loading";
 import { Post } from "@layout/Post";
@@ -13,11 +12,11 @@ export function Feed() {
   const data: [] = [];
   const isLoading = false;
 
-  function scrollToTop() {
-    if (flatListRef.current) {
-      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
-    }
-  }
+  // function scrollToTop() {
+  //   if (flatListRef.current) {
+  //     flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+  //   }
+  // }
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -27,7 +26,7 @@ export function Feed() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1">
+    <View className="flex-1">
       {!isLoading ? (
         <FlatList
           ref={flatListRef}
@@ -48,6 +47,6 @@ export function Feed() {
       ) : (
         <Loading />
       )}
-    </SafeAreaView>
+    </View>
   );
 }

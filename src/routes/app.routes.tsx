@@ -19,7 +19,6 @@ import {
   CoffeeIcon,
   HomeIcon,
   PenSquareIcon,
-  PresentationIcon,
   SearchIcon,
   User2Icon,
 } from "lucide-react-native";
@@ -41,13 +40,19 @@ export function AppRoutes() {
   const { isSearching } = useContext(SearchContext);
   const { colorScheme } = useColorScheme();
 
-  const initialRouteName: keyof AppRoutes = "OnBoarding";
+  const alreadySeenOnboarding = false;
+
+  const initialRouteName: keyof AppRoutes = alreadySeenOnboarding
+    ? "Feed"
+    : "OnBoarding";
 
   const tabBarActiveTintColor =
-    colorScheme === "light" ? colors.theme.white : colors.theme.black;
+    colorScheme === "light" ? colors.theme.black : colors.theme.white;
 
   const tabBarInactiveTintColor =
-    colorScheme === "light" ? colors.theme.black : colors.theme.white;
+    colorScheme === "light"
+      ? colors.theme.gray.medium
+      : colors.theme.gray.medium;
 
   return (
     <Navigator
@@ -60,6 +65,8 @@ export function AppRoutes() {
         tabBarActiveTintColor,
         tabBarInactiveTintColor,
         tabBarStyle: {
+          borderTopColor: colors.theme.gray.light,
+          borderTopWidth: 1,
           backgroundColor: "transparent",
           elevation: 0,
           height: 60,
@@ -70,7 +77,7 @@ export function AppRoutes() {
         name="OnBoarding"
         component={Onboarding}
         options={{
-          tabBarIcon: ({ color }) => <PresentationIcon color={color} />,
+          tabBarButton: () => null,
           tabBarStyle: { display: "none" },
         }}
       />

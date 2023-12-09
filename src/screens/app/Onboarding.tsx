@@ -9,7 +9,7 @@ import { TextButton } from "@ui/TextButton";
 
 import { AppNavigationRoutesProps } from "@routes/app.routes";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react-native";
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "lucide-react-native";
 
 import colors from "@theme/colors";
 
@@ -22,8 +22,8 @@ export function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(0);
   const navigation = useNavigation<AppNavigationRoutesProps>();
 
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const slidesRef = useRef(null);
+  const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
+  const slidesRef = useRef<FlatList>(null);
 
   const viewableItemsChanged = useRef(
     ({ viewableItems }: ViewableItemsType) => {
@@ -56,6 +56,24 @@ export function Onboarding() {
       image: "https://github.com/Mattheo.png",
     },
   ];
+
+  function scrollForwards() {
+    if (currentIndex === null || !slidesRef.current) return;
+
+    if (currentIndex < data.length - 1) {
+      slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      handleNavigateToFeed();
+    }
+  }
+
+  function scrollBackwards() {
+    if (currentIndex === null || !slidesRef.current) return;
+
+    if (currentIndex !== 0) {
+      slidesRef.current.scrollToIndex({ index: currentIndex - 1 });
+    } else return;
+  }
 
   function handleNavigateToFeed() {
     navigation.navigate("Feed");
@@ -95,9 +113,12 @@ export function Onboarding() {
       />
 
       <View className="flex-row items-center p-8">
-        <View className="h-12 w-12">
+        <View className="h-10 w-10">
           {currentIndex !== 0 && (
-            <IconButton className="h-full w-full rounded-full border border-theme-gray-medium">
+            <IconButton
+              onPress={scrollBackwards}
+              className="h-full w-full rounded-full border border-theme-gray-medium"
+            >
               <ArrowLeftIcon color={colors.theme.gray.medium} size={20} />
             </IconButton>
           )}
@@ -105,8 +126,15 @@ export function Onboarding() {
 
         <Paginator data={data} scrollX={scrollX} />
 
-        <IconButton className="h-12 w-12 rounded-full border border-theme-primary bg-theme-primary">
-          <ArrowRightIcon color={colors.theme.white} size={20} />
+        <IconButton
+          onPress={scrollForwards}
+          className="h-10 w-10 rounded-full border border-theme-primary bg-theme-primary"
+        >
+          {currentIndex == data.length - 1 ? (
+            <CheckIcon color={colors.theme.white} size={20} />
+          ) : (
+            <ArrowRightIcon color={colors.theme.white} size={20} />
+          )}
         </IconButton>
       </View>
     </View>
