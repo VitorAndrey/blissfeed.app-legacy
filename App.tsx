@@ -16,9 +16,6 @@ import { Routes } from "@routes/index";
 import { AppProvider } from "@layout/AppProvider";
 import { Loading } from "@layout/Loading";
 
-// import { MMKV } from "react-native-mmkv";
-// export const storage = new MMKV({ id: "blissfeed" });
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,

@@ -1,9 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 
-// import { useMMKVObject } from "react-native-mmkv";
 import { User } from "@models/index";
-
-// import { storage } from "../../App";
 
 type UserContextType = {
   user: User | null;
@@ -14,7 +11,6 @@ type UserContextType = {
 export const UserContext = createContext({} as UserContextType);
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
-  // const [user, setUser] = useMMKVObject<User>("user");
   const [user, setUser] = useState<User | null>(null);
 
   function handleUpdateUser(user: User | null) {

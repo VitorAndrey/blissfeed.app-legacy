@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
   TextProps,
   TouchableOpacity,
@@ -16,25 +17,41 @@ type IconButtonProps = {
   textProps?: TextProps & {
     textClass?: ClassNameValue;
   };
+  variant?: "default" | "secondary";
+  icon?: () => ReactNode;
 };
 
 export function Button({
   touchableOpacityProps,
   textProps,
+  icon,
+  variant = "default",
   children,
 }: IconButtonProps) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       className={twMerge(
-        "bg-primary h-10 w-full items-center justify-center rounded-3xl bg-theme-primary px-2",
+        `${
+          variant === "secondary"
+            ? "border border-theme-gray-light bg-transparent"
+            : "bg-theme-primary"
+        }  h-10 w-full flex-row items-center justify-center rounded-3xl px-2`,
         touchableOpacityProps?.containerClass,
       )}
       {...touchableOpacityProps}
     >
-      <Text className={twMerge("", textProps?.textClass)} {...textProps}>
+      <Text
+        className={twMerge(
+          `${variant === "default" && "text-theme-white"}`,
+          textProps?.textClass,
+        )}
+        {...textProps}
+      >
         {children}
       </Text>
+
+      {icon && icon()}
     </TouchableOpacity>
   );
 }

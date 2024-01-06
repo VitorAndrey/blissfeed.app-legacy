@@ -182,9 +182,6 @@ export function Register() {
               touchableOpacityProps={{
                 onPress: handleSubmit(onSubmit),
               }}
-              textProps={{
-                textClass: "text-theme-white",
-              }}
             >
               Registrar
             </Button>

@@ -50,7 +50,6 @@ export function Welcome() {
             containerClass: "my-5",
             onPress: handleNavigateToRegister,
           }}
-          textProps={{ textClass: "text-theme-white" }}
         >
           Vamos começar!
         </Button>

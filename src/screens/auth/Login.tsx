@@ -145,9 +145,6 @@ export function Login() {
               touchableOpacityProps={{
                 onPress: handleSubmit(onSubmit),
               }}
-              textProps={{
-                textClass: "text-theme-white",
-              }}
             >
               Entrar
             </Button>

@@ -65,8 +65,6 @@ export function AppRoutes() {
         tabBarActiveTintColor,
         tabBarInactiveTintColor,
         tabBarStyle: {
-          borderTopColor: colors.theme.gray.light,
-          borderTopWidth: 1,
           backgroundColor: "transparent",
           elevation: 0,
           height: 60,
