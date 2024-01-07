@@ -20,6 +20,7 @@ module.exports = function (api) {
             "@routes": "./src/routes",
             "@assets": "./src/assets",
             "@models": "./src/models",
+            "@storage": "./src/storage",
             "@contexts": "./src/contexts",
             "@services": "./src/services",
             "@theme": "./src/theme",

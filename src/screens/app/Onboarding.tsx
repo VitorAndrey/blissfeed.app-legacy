@@ -4,6 +4,7 @@ import { Animated, FlatList, View, ViewToken } from "react-native";
 import { OnBoardingItem } from "@layout/OnBoardingItem";
 import { Paginator } from "@layout/Paginator";
 import { useNavigation } from "@react-navigation/native";
+import { setViewedOnboarding } from "@storage/setViewedOnboarding";
 import { IconButton } from "@ui/IconButton";
 import { TextButton } from "@ui/TextButton";
 
@@ -75,7 +76,8 @@ export function Onboarding() {
     } else return;
   }
 
-  function handleNavigateToFeed() {
+  async function handleNavigateToFeed() {
+    await setViewedOnboarding();
     navigation.navigate("Feed");
   }
 

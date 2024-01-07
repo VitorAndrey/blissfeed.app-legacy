@@ -2,6 +2,7 @@
 // import { FlatList } from "react-native";
 import { Image, TouchableOpacity, View } from "react-native";
 
+import { clearOnboarding } from "@storage/clearOnboarding";
 import { Button } from "@ui/Button";
 import { ProfileAnalyticsItem } from "@ui/ProfileAnalyticsItem";
 import { Text } from "@ui/Text";
@@ -17,6 +18,10 @@ import colors from "@theme/colors";
 
 export function Profile() {
   // const [data, setData] = useState([{ id: "1", name: "jhon" }]);
+
+  async function handleClearOnBoarding() {
+    await clearOnboarding();
+  }
 
   return (
     <View className="flex-1">
@@ -100,6 +105,14 @@ export function Profile() {
           keyExtractor={(item) => item.id}
         /> */}
       </View>
+
+      <Button
+        touchableOpacityProps={{
+          onPress: handleClearOnBoarding,
+        }}
+      >
+        Ver Onboarding
+      </Button>
     </View>
   );
 }

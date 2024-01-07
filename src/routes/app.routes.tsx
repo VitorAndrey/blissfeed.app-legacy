@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
   BottomTabNavigationProp,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
+import { viewedOnboarding } from "@storage/viewedOnboarding";
 import { useColorScheme } from "nativewind";
-import colors from "src/theme/colors";
 
 import { CreatePost } from "@screens/app/CreatePost";
 import { Feed } from "@screens/app/Feed";
@@ -23,6 +23,8 @@ import {
   User2Icon,
 } from "lucide-react-native";
 
+import colors from "@theme/colors";
+
 export type AppRoutes = {
   OnBoarding: undefined;
   Feed: undefined;
@@ -37,12 +39,16 @@ export type AppNavigationRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 export function AppRoutes() {
+  const [alreadyViewedOnboarding, setAlreadyViewedOnboarding] = useState(false);
+
   const { isSearching } = useContext(SearchContext);
   const { colorScheme } = useColorScheme();
 
-  const alreadySeenOnboarding = false;
+  async function handleViewedOnboarding() {
+    setAlreadyViewedOnboarding(await viewedOnboarding());
+  }
 
-  const initialRouteName: keyof AppRoutes = alreadySeenOnboarding
+  const initialRouteName: keyof AppRoutes = alreadyViewedOnboarding
     ? "Feed"
     : "OnBoarding";
 
@@ -53,6 +59,10 @@ export function AppRoutes() {
     colorScheme === "light"
       ? colors.theme.gray.medium
       : colors.theme.gray.medium;
+
+  useEffect(() => {
+    handleViewedOnboarding();
+  }, []);
 
   return (
     <Navigator

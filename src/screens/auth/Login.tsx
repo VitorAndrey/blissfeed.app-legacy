@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
+import Modal from "react-native-modal";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputErrorMessage } from "@layout/InputErrorMessage";
@@ -8,16 +9,16 @@ import { Loading } from "@layout/Loading";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
-import { SocialButton } from "@ui/SocialButton";
+// import { SocialButton } from "@ui/SocialButton";
 import { Text } from "@ui/Text";
 import { TextButton } from "@ui/TextButton";
 import * as yup from "yup";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-import GoogleIcon from "@assets/googleIcon.svg";
-// import { LoginUser } from "@models/index";
+// import GoogleIcon from "@assets/googleIcon.svg";
+import { LoginUser, User } from "@models/index";
 import { UserContext } from "@contexts/UserContext";
-// import { loginUser } from "@services/authentication";
+import { loginUser } from "@services/authentication";
 
 const schema = yup
   .object({
@@ -33,8 +34,13 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 
+type ModalStatus = "success" | "error" | null;
+
 export function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [modalStatus, setModalStatus] = useState<ModalStatus>(null);
+  const [loggedUser, setLoggedUser] = useState<User | null>(null);
+
   const { handleUpdateUser } = useContext(UserContext);
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
@@ -51,24 +57,18 @@ export function Login() {
     setIsLoading(true);
 
     const { email, password } = data;
-    console.log(email, password);
 
     try {
-      // const user = await loginUser({
-      //   email,
-      //   password,
-      // } satisfies LoginUser);
-
-      const user = {
-        id: "1",
-        name: "Jhon Doe",
-        email: "jhon@gmail.com",
-        password: "12345678",
-      };
+      const user = await loginUser({
+        email,
+        password,
+      } satisfies LoginUser);
 
       reset();
-      handleUpdateUser(user);
+      setModalStatus("success");
+      setLoggedUser(user);
     } catch (error) {
+      setModalStatus("error");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -78,6 +78,12 @@ export function Login() {
   function handleNavigateToRegister() {
     navigation.navigate("Register");
   }
+
+  function handleCompleteLogin() {
+    setModalStatus(null);
+    handleUpdateUser(loggedUser);
+  }
+
   return (
     <View className="flex-1">
       <ScrollView
@@ -150,7 +156,7 @@ export function Login() {
             </Button>
           )}
 
-          <View className="flex-row items-center gap-2 py-8 px-8">
+          {/* <View className="flex-row items-center gap-2 py-8 px-8">
             <View className="h-px flex-1 bg-theme-gray-light"></View>
             <Text className="text-xs text-theme-gray-medium">Ou entre com</Text>
             <View className="h-px flex-1 bg-theme-gray-light"></View>
@@ -160,7 +166,7 @@ export function Login() {
             <GoogleIcon className="h-8 w-8" />
 
             <Text>Google</Text>
-          </SocialButton>
+          </SocialButton> */}
 
           <View className="mt-8 flex-row items-center justify-center">
             <Text className="mr-1 text-xs">Não tem uma conta?</Text>
@@ -175,6 +181,36 @@ export function Login() {
           </View>
         </View>
       </ScrollView>
+
+      <Modal isVisible={!modalStatus}>
+        <View>
+          {modalStatus === "success" ? (
+            <>
+              <Text>Tudo Certo!</Text>
+
+              <Button
+                touchableOpacityProps={{
+                  onPress: handleCompleteLogin,
+                }}
+              >
+                Começar
+              </Button>
+            </>
+          ) : (
+            <>
+              <Text>Erro ao fazer login!</Text>
+
+              <Button
+                touchableOpacityProps={{
+                  onPress: () => setModalStatus(null),
+                }}
+              >
+                Fechar
+              </Button>
+            </>
+          )}
+        </View>
+      </Modal>
     </View>
   );
 }

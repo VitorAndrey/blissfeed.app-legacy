@@ -3,7 +3,7 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 
-import { CompleteRegister } from "@screens/auth/CompleteRegister";
+// import { CompleteRegister } from "@screens/auth/CompleteRegister";
 import { Login } from "@screens/auth/Login";
 import { Register } from "@screens/auth/Register";
 import { Welcome } from "@screens/auth/Welcome";
@@ -31,7 +31,7 @@ export function AuthRoutes() {
       <Screen name="Welcome" component={Welcome} />
       <Screen name="Login" component={Login} />
       <Screen name="Register" component={Register} />
-      <Screen name="CompleteRegister" component={CompleteRegister} />
+      {/* <Screen name="CompleteRegister" component={CompleteRegister} /> */}
     </Navigator>
   );
 }

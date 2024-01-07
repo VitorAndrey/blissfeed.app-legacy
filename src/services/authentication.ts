@@ -6,7 +6,7 @@ import { LoginUser, RegisterUser, User } from "@models/index";
 const baseUrl = API_URL;
 
 export async function registerUser(user: RegisterUser) {
-  const url = baseUrl + "/register";
+  const url = baseUrl + "/users";
 
   try {
     await axios.post(url, user);
@@ -16,7 +16,7 @@ export async function registerUser(user: RegisterUser) {
 }
 
 export async function loginUser(user: LoginUser): Promise<User | null> {
-  const url = baseUrl + "/login";
+  const url = baseUrl + "/sessions";
 
   let loggedUser = null;
 

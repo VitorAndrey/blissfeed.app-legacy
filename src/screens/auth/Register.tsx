@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, TouchableOpacity, View } from "react-native";
+import Modal from "react-native-modal";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputErrorMessage } from "@layout/InputErrorMessage";
@@ -8,13 +9,13 @@ import { Loading } from "@layout/Loading";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
-import { SocialButton } from "@ui/SocialButton";
+// import { SocialButton } from "@ui/SocialButton";
 import { Text } from "@ui/Text";
 import { TextButton } from "@ui/TextButton";
 import * as yup from "yup";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-import GoogleIcon from "@assets/googleIcon.svg";
+// import GoogleIcon from "@assets/googleIcon.svg";
 import { RegisterUser } from "@models/index";
 import { registerUser } from "@services/authentication";
 
@@ -39,9 +40,12 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 
+type ModalStatus = "success" | "error" | null;
+
 export function Register() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [agreedConditions, setAgreedConditions] = useState<boolean>(false);
+  const [modalStatus, setModalStatus] = useState<ModalStatus>(null);
 
   const navigation = useNavigation<AuthNavigationRoutesProps>();
 
@@ -67,15 +71,16 @@ export function Register() {
       } satisfies RegisterUser);
 
       reset();
-      handleNavigateToLogin();
     } catch (error) {
       console.log(error);
+      setModalStatus("error");
     } finally {
       setIsLoading(false);
     }
   };
 
   function handleNavigateToLogin() {
+    setModalStatus(null);
     navigation.navigate("Login");
   }
 
@@ -187,7 +192,7 @@ export function Register() {
             </Button>
           )}
 
-          <View className="flex-row items-center gap-2 py-8 px-8">
+          {/* <View className="flex-row items-center gap-2 py-8 px-8">
             <View className="h-px flex-1 bg-theme-gray-light"></View>
             <Text className="text-xs text-theme-gray-medium">Registre com</Text>
             <View className="h-px flex-1 bg-theme-gray-light"></View>
@@ -197,7 +202,7 @@ export function Register() {
             <GoogleIcon className="h-8 w-8" />
 
             <Text>Google</Text>
-          </SocialButton>
+          </SocialButton> */}
 
           <View className="mt-8 flex-row items-center justify-center">
             <Text className="mr-1 text-xs">Já tem uma conta?</Text>
@@ -212,6 +217,36 @@ export function Register() {
           </View>
         </View>
       </ScrollView>
+
+      <Modal isVisible={!modalStatus}>
+        <View>
+          {modalStatus === "success" ? (
+            <>
+              <Text>Tudo Certo!</Text>
+
+              <Button
+                touchableOpacityProps={{
+                  onPress: handleNavigateToLogin,
+                }}
+              >
+                Fazer Login
+              </Button>
+            </>
+          ) : (
+            <>
+              <Text>Erro ao registrar usuario!</Text>
+
+              <Button
+                touchableOpacityProps={{
+                  onPress: () => setModalStatus(null),
+                }}
+              >
+                Fechar
+              </Button>
+            </>
+          )}
+        </View>
+      </Modal>
     </View>
   );
 }
