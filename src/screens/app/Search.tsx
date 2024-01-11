@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Text } from "@ui/Text";
 
@@ -35,7 +36,7 @@ export function Search() {
   const data: [] = [];
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <View className="flex-row items-center px-4">
         {isSearching && (
           <TouchableOpacity
@@ -57,6 +58,6 @@ export function Search() {
       </View>
 
       <FlatList data={data} renderItem={renderPostItem} className="flex-1" />
-    </View>
+    </SafeAreaView>
   );
 }

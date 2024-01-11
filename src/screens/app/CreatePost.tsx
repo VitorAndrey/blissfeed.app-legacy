@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "@ui/Text";
@@ -22,7 +23,7 @@ export function CreatePost() {
   }
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <View className="flex-row items-center gap-3 px-4">
         <TouchableOpacity onPress={handleGoBack}>
           <X color="black" size={22} />
@@ -67,6 +68,6 @@ export function CreatePost() {
           <SendHorizonal color="black" size={20} />
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

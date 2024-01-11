@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
-import { FlatList, RefreshControl, View } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Loading } from "@layout/Loading";
 import { Post } from "@layout/Post";
@@ -26,7 +27,7 @@ export function Feed() {
   }, []);
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       {!isLoading ? (
         <FlatList
           ref={flatListRef}
@@ -47,6 +48,6 @@ export function Feed() {
       ) : (
         <Loading />
       )}
-    </View>
+    </SafeAreaView>
   );
 }

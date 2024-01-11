@@ -36,7 +36,10 @@ export function Button({
           variant === "secondary"
             ? "border border-theme-gray-light bg-transparent"
             : "bg-theme-primary"
-        }  h-10 w-full flex-row items-center justify-center rounded-3xl px-2`,
+        }
+        ${touchableOpacityProps?.disabled && "bg-theme-primary/60"}
+
+        h-10 w-full flex-row items-center justify-center rounded-3xl px-2`,
         touchableOpacityProps?.containerClass,
       )}
       {...touchableOpacityProps}

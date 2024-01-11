@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 import Modal from "react-native-modal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputErrorMessage } from "@layout/InputErrorMessage";
@@ -62,14 +63,15 @@ export function Login() {
       const user = await loginUser({
         email,
         password,
-      } satisfies LoginUser);
+      } as LoginUser);
 
       reset();
+
       setModalStatus("success");
       setLoggedUser(user);
     } catch (error) {
       setModalStatus("error");
-      console.log(error);
+      console.log("Error while logging user", error);
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +87,7 @@ export function Login() {
   }
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <ScrollView
         keyboardShouldPersistTaps="always"
         contentContainerStyle={{
@@ -97,10 +99,10 @@ export function Login() {
       >
         <View className="items-center px-10 pb-4">
           <Text className="mb-6 max-w-[200px] text-center font-inter-600 text-2xl">
-            Bem vindo de volta!
+            Bem vindo!
           </Text>
           <Text className="text-center text-theme-gray-medium">
-            Sentimos sua falta por aqui... É bom ter você conosco novamente!
+            Obrigado por entrar no Blissfeed... É bom ter você conosco!
           </Text>
         </View>
 
@@ -182,11 +184,11 @@ export function Login() {
         </View>
       </ScrollView>
 
-      <Modal isVisible={!modalStatus}>
-        <View>
+      <Modal isVisible={modalStatus !== null}>
+        <View className="mx-auto h-40 w-[95%] items-center justify-center rounded-xl bg-theme-white p-8">
           {modalStatus === "success" ? (
             <>
-              <Text>Tudo Certo!</Text>
+              <Text className="mb-6 text-base">Tudo Certo!</Text>
 
               <Button
                 touchableOpacityProps={{
@@ -198,7 +200,7 @@ export function Login() {
             </>
           ) : (
             <>
-              <Text>Erro ao fazer login!</Text>
+              <Text className="mb-6 text-base">Erro ao fazer login!</Text>
 
               <Button
                 touchableOpacityProps={{
@@ -211,6 +213,6 @@ export function Login() {
           )}
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 }

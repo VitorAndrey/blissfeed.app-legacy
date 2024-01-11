@@ -1,4 +1,5 @@
 import { Image, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@ui/Button";
@@ -19,7 +20,7 @@ export function Welcome() {
   }
 
   return (
-    <View className="flex-1 py-6">
+    <SafeAreaView className="flex-1 py-6">
       <View className="flex-row items-center justify-center gap-2">
         <View className="h-8 w-8 rounded-full bg-theme-primary"></View>
         <Text className="font-itim-400 text-3xl">Blissfeed</Text>
@@ -66,6 +67,6 @@ export function Welcome() {
           </TextButton>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

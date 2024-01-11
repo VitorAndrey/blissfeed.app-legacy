@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Animated, FlatList, View, ViewToken } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { OnBoardingItem } from "@layout/OnBoardingItem";
 import { Paginator } from "@layout/Paginator";
@@ -82,7 +83,7 @@ export function Onboarding() {
   }
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <SafeAreaView className="flex-1 items-center justify-center">
       <TextButton
         touchableOpacityProps={{
           containerClass: "p-4 self-end",
@@ -139,6 +140,6 @@ export function Onboarding() {
           )}
         </IconButton>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

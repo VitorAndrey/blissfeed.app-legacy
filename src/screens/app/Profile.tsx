@@ -1,11 +1,15 @@
 // import { useState } from "react";
 // import { FlatList } from "react-native";
+import { useContext } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { clearOnboarding } from "@storage/clearOnboarding";
 import { Button } from "@ui/Button";
 import { ProfileAnalyticsItem } from "@ui/ProfileAnalyticsItem";
 import { Text } from "@ui/Text";
+
+import { UserContext } from "@contexts/UserContext";
 
 import {
   HeartIcon,
@@ -19,12 +23,14 @@ import colors from "@theme/colors";
 export function Profile() {
   // const [data, setData] = useState([{ id: "1", name: "jhon" }]);
 
+  const { handleUpdateUser } = useContext(UserContext);
+
   async function handleClearOnBoarding() {
     await clearOnboarding();
   }
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <View className="relative h-40 w-full">
         <Image
           source={{ uri: "https://github.com/X.png" }}
@@ -50,7 +56,7 @@ export function Profile() {
 
         <View className="flex-row items-center gap-1">
           <Text className="text-xs text-theme-gray-medium">
-            Vencerei a(o) Ansiedade
+            Vencerei a Ansiedade
           </Text>
           <HeartIcon
             fill={colors.theme.primary}
@@ -106,13 +112,27 @@ export function Profile() {
         /> */}
       </View>
 
-      <Button
-        touchableOpacityProps={{
-          onPress: handleClearOnBoarding,
-        }}
-      >
-        Ver Onboarding
-      </Button>
-    </View>
+      <View className="mt-12 flex-row px-4">
+        <Button
+          variant="secondary"
+          touchableOpacityProps={{
+            onPress: handleClearOnBoarding,
+            containerClass: "flex-1 mr-2",
+          }}
+        >
+          Ver Onboarding
+        </Button>
+
+        <Button
+          variant="secondary"
+          touchableOpacityProps={{
+            onPress: () => handleUpdateUser(null),
+            containerClass: "flex-1",
+          }}
+        >
+          Sair
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 }
